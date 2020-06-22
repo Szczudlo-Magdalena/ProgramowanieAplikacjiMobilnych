@@ -55,7 +55,7 @@ namespace AirMonitor.Airly
             HttpClient client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("Accept-Language", "en");
+            client.DefaultRequestHeaders.Add("Accept-Language", "pl");
             client.DefaultRequestHeaders.Add("apikey", apiKey);
 
             return client;

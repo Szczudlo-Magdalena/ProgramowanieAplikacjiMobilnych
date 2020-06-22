@@ -16,9 +16,9 @@ namespace AirMonitor.Airly
         public string Description => Indexes[0].Description;
         public string Color => Indexes[0].Color;
         public double Pm25 => GetValue("PM25");
-        public double Pm25Percent => GetValue("PM25") * 100;
+        public double Pm25Percent => GetValue("PM25") * 10;
         public double Pm10 => GetValue("PM10");
-        public double Pm10Percent => Pm10 * 100;
+        public double Pm10Percent => Pm10 * 10;
         public double Humidity => GetValue("HUMIDITY") / 100.0;
         public double Pressure => GetValue("PRESSURE");
 

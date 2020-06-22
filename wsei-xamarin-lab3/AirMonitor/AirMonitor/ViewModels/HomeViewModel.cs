@@ -48,10 +48,10 @@ namespace AirMonitor.ViewModels
             Xamarin.Essentials.Location last = await Geolocation.GetLastKnownLocationAsync();
             Airly.Location location = new Airly.Location()
             {
-                //Latitude = last.Latitude,
-                //Longitude = last.Longitude
-                Latitude = 50.062006,
-                Longitude = 19.940984
+                Latitude = last.Latitude,
+                Longitude = last.Longitude
+                //Latitude = 50.062006,
+                //Longitude = 19.940984
             };
 
             Measurement = await api.GetMeasurementAsync(location);
