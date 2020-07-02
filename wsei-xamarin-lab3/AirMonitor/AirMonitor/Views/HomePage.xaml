@@ -2,15 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AirMonitor.Views.HomePage"
+             xmlns:models="clr-namespace:AirMonitor.Models"
              Title="Home Page">
-    <StackLayout>
-        <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
-        <ListView ItemsSource="{Binding Measurement.History}" ItemTapped="ListView_ItemTapped">
+    <Grid>
+        <ListView ItemsSource="{Binding Items}" 
+                  ItemTapped="ListView_ItemTapped" 
+                  SelectionMode="None"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding FromDateTime}" />
+                    <TextCell Text="{Binding Installation.Address.Description}"
+                              Detail="{Binding CurrentDisplayValue, StringFormat='CAQI: {0}'}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    </StackLayout>
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"/>
+    </Grid>
 </ContentPage>

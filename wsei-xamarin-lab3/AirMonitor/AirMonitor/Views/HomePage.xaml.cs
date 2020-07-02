@@ -1,10 +1,15 @@
-﻿using AirMonitor.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using AirMonitor.Models;
+using AirMonitor.ViewModels;
 using Xamarin.Forms;
 
 namespace AirMonitor.Views
 {
     public partial class HomePage : ContentPage
     {
+        private HomeViewModel _viewModel => BindingContext as HomeViewModel;
+
         public HomePage()
         {
             InitializeComponent();
@@ -12,9 +17,9 @@ namespace AirMonitor.Views
             BindingContext = new HomeViewModel(Navigation);
         }
 
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            ((HomeViewModel)BindingContext).GoToDetailsCommand.Execute(e.Item);
+            _viewModel.GoToDetailsCommand.Execute(e.Item as Measurement);
         }
     }
 }

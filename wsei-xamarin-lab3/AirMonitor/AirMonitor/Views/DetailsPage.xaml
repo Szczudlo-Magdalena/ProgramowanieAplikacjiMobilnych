@@ -15,19 +15,19 @@
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:ValueToPercentConverter x:Key="ValueToPercent"/>
+            <converters:PercentToValueConverter x:Key="PercentToValue"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
         <Grid>
             <StackLayout Style="{StaticResource DetailsLayoutStyle}">
-                <Frame Style="{StaticResource CaqiFrameStyle}" BackgroundColor="{Binding MeasurementItem.Color}">
+                <Frame Style="{StaticResource CaqiFrameStyle}">
                     <Label Style="{StaticResource CenteredTextStyle}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
-                                    Text="{Binding MeasurementItem.Caqi}"
+                                    Text="{Binding CaqiValue}"
                                     Style="{StaticResource CaqiValueSpanStyle}"/>
                                 <Span
                                     Text="{x:Static x:Environment.NewLine}"/>
@@ -39,10 +39,10 @@
                     </Label>
                 </Frame>
                 <Label
-                    Text="{Binding MeasurementItem.Description}"
+                    Text="{Binding CaqiTitle}"
                     Style="{StaticResource CaqiTitleStyle}"/>
                 <Label
-                    Text=""
+                    Text="{Binding CaqiDescription}"
                     Style="{StaticResource CaqiDescriptionStyle}" />
 
                 <BoxView Style="{StaticResource HorizontalSeparatorStyle}"/>
@@ -59,13 +59,13 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span
-                                            Text="{Binding MeasurementItem.Pm25}"
+                                            Text="{Binding Pm25Value}"
                                             Style="{StaticResource NormalTextSpanStyle}"/>
                                         <Span
-                                            Text=" mg/m3 "
+                                            Text=" µg/m³ "
                                             Style="{StaticResource SmallTextSpanStyle}"/>
                                         <Span
-                                            Text="{Binding MeasurementItem.Pm25Percent, StringFormat='({0}%)'}"
+                                            Text="{Binding Pm25Percent, StringFormat='({0}%)'}"
                                             Style="{StaticResource NormalTextSpanStyle}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -86,13 +86,13 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span
-                                            Text="{Binding MeasurementItem.Pm10}"
+                                            Text="{Binding Pm10Value}"
                                             Style="{StaticResource NormalTextSpanStyle}"/>
                                         <Span
-                                            Text=" mg/m3 "
+                                            Text=" µg/m³ "
                                             Style="{StaticResource SmallTextSpanStyle}"/>
                                         <Span
-                                            Text="{Binding MeasurementItem.Pm10Percent, StringFormat='({0}%)'}"
+                                            Text="{Binding Pm10Percent, StringFormat='({0}%)'}"
                                             Style="{StaticResource NormalTextSpanStyle}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -107,10 +107,10 @@
                     <controls:ContentWithHeader.ControlContent>
                         <StackLayout>
                             <Label
-                                Text="{Binding MeasurementItem.Humidity, Converter={StaticResource ValueToPercent}, StringFormat='{0}%'}"
+                                Text="{Binding HumidityPercent, StringFormat='{0}%'}"
                                 Style="{StaticResource NormalTextLabelStyle}"/>
                             <Slider
-                                Value="{Binding MeasurementItem.Humidity}"
+                                Value="{Binding HumidityPercent, Converter={StaticResource PercentToValue}, Mode=OneWay}"
                                 Style="{StaticResource SliderStyle}"/>
                         </StackLayout>
                     </controls:ContentWithHeader.ControlContent>
@@ -121,13 +121,13 @@
                     <controls:ContentWithHeader.ControlContent>
                         <StackLayout>
                             <Label
-                                Text="{Binding MeasurementItem.Pressure, StringFormat='{0} hPa'}"
+                                Text="{Binding PressureValue, StringFormat='{0} hPa'}"
                                 Style="{StaticResource NormalTextLabelStyle}"/>
                             <!-- Set Maximum before Minimum in Slider -->
                             <Slider
                                 Maximum="1100"
                                 Minimum="900"
-                                Value="1026"
+                                Value="{Binding PressureValue}"
                                 Style="{StaticResource SliderStyle}"/>
                         </StackLayout>
                     </controls:ContentWithHeader.ControlContent>
